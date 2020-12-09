@@ -1,10 +1,16 @@
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 import "./App.css";
+import { Player } from "./components/Player";
 
 function App() {
   return (
-    <div className="App">
-      <h2>tracker</h2>
-    </div>
+    <Container maxWidth="lg">
+      <div className="App">
+        <Typography variant="h4">tracker</Typography>
+        <Player />
+      </div>
+    </Container>
   );
 }
 
