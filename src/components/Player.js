@@ -23,7 +23,7 @@ export const Player = () => {
     { title: "No name tracker  #3", src: "./music/03.mp3" },
   ]);
 
-  const [currentSong, setCurrentSong] = useState(0);
+  const [currentSong, setCurrentSong] = useState(null);
   const [timeDuration, setTimeDuration] = useState(0);
   const [timeCurrent, setTimeCurrent] = useState(0);
 
@@ -35,8 +35,12 @@ export const Player = () => {
   };
 
   const toggleTrack = (number) => {
-    setCurrentSong(number);
-    setIsPlaying(!isPlaying);
+    if (number === currentSong) {
+      setIsPlaying(false);
+    } else {
+      setCurrentSong(number);
+      setIsPlaying(true);
+    }
   };
 
   const deleteTrack = (trackTitle) => {
@@ -46,7 +50,7 @@ export const Player = () => {
 
   useEffect(() => {
     isPlaying ? audioEl.current.play() : audioEl.current.pause();
-  }, [isPlaying]);
+  }, [isPlaying, currentSong]);
 
   const tracksList = songs.map((track, index) => (
     <Track
@@ -66,7 +70,9 @@ export const Player = () => {
     <div>
       <audio
         controls
-        src={songs.length ? songs[currentSong].src : ""}
+        src={
+          songs.length && currentSong !== null ? songs[currentSong].src : null
+        } // При удалении последнего трека нужен null
         ref={audioEl}
         onTimeUpdate={currentTimeTrack}
         onCanPlay={durationTrack}
