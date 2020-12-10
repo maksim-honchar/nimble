@@ -46,7 +46,7 @@ export const Player = () => {
 
   useEffect(() => {
     isPlaying ? audioEl.current.play() : audioEl.current.pause();
-  }, [isPlaying, timeDuration]);
+  }, [isPlaying]);
 
   const tracksList = songs.map((track, index) => (
     <Track
