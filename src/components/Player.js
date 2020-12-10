@@ -70,9 +70,7 @@ export const Player = () => {
     <div>
       <audio
         controls
-        src={
-          songs.length && currentSong !== null ? songs[currentSong].src : null
-        } // При удалении последнего трека нужен null
+        src={songs.length && currentSong !== null ? songs[currentSong].src : ""} // При удалении последнего трека нужен null
         ref={audioEl}
         onTimeUpdate={currentTimeTrack}
         onCanPlay={durationTrack}
