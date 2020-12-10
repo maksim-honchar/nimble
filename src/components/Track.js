@@ -12,7 +12,7 @@ export const Track = (props) => {
     <ListItem>
       <ListItemText primary={props.title} />
       <span style={{ marginRight: 50 }}>
-        {props.index === props.currentSong && props.isPlaying
+        {props.index === props.currentSong
           ? `${props.timingTrack} / ${props.totalTime}`
           : null}
       </span>

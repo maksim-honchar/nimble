@@ -36,7 +36,7 @@ export const Player = () => {
 
   const toggleTrack = (number) => {
     if (number === currentSong) {
-      setIsPlaying(false);
+      setIsPlaying(!isPlaying);
     } else {
       setCurrentSong(number);
       setIsPlaying(true);
