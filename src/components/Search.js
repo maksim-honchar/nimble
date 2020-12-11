@@ -28,13 +28,14 @@ export const Search = (props) => {
   const playTrack = (e) => {
     e.preventDefault();
     props.songs.forEach((track, index) => {
-      if (track.title === trackTitle) {
+      if (trackTitle === "") {
+        props.setIsPlaying(!props.isPlaying);
+      } else if (track.title === trackTitle) {
         props.toggleTrack(index);
+        props.setIsPlaying(true);
       }
-      return track;
     });
     setTrackTitle("");
-    props.setIsPlaying(!props.isPlaying);
   };
 
   return (
