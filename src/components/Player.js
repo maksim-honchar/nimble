@@ -46,6 +46,8 @@ export const Player = () => {
 
   const deleteTrack = (trackTitle) => {
     const newList = songs.filter((track) => track.title !== trackTitle);
+    setCurrentSong(null);
+    setIsPlaying(false);
     setSongs(newList);
   };
 

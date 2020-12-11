@@ -40,7 +40,7 @@ export const Search = (props) => {
                 onClick={playTrack}
                 edge="end"
               >
-                {props.isPlaying === true ? (
+                {props.isPlaying ? (
                   <PauseCircleOutlineIcon fontSize="large" />
                 ) : (
                   <PlayCircleOutlineIcon fontSize="large" />
