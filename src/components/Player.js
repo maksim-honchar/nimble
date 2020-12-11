@@ -3,6 +3,7 @@ import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Track } from "./Track";
+import { Search } from "./Search";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,6 +76,7 @@ export const Player = () => {
         onTimeUpdate={currentTimeTrack}
         onCanPlay={durationTrack}
       />
+      <Search />
       <List className={classes.root}>{tracksList}</List>
     </div>
   );
