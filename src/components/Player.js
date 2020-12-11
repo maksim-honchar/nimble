@@ -48,6 +48,7 @@ export const Player = () => {
       <Track
         index={index}
         title={track.title}
+        artist={track.artist}
         currentSong={currentSong}
         isPlaying={isPlaying}
         toggleTrack={toggleTrack}
@@ -66,9 +67,12 @@ export const Player = () => {
         onTimeUpdate={currentTimeTrack}
         onCanPlay={durationTrack}
       />
-      <Typography variant="h2" gutterBottom>
-        tracker
-      </Typography>
+      <div className="title">
+        <Typography variant="h3" gutterBottom>
+          <strong>tracker</strong>
+        </Typography>
+      </div>
+
       <Search
         songs={songs}
         toggleTrack={toggleTrack}

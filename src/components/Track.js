@@ -29,14 +29,13 @@ export const Track = (props) => {
     >
       <ListItemText
         primary={props.title}
+        secondary={props.artist}
         className={props.index === props.currentSong ? classes.root : null}
       />
       <span
         className={props.index === props.currentSong ? classes.timing : null}
       >
-        {props.index === props.currentSong
-          ? `${props.timingTrack} / ${props.totalTime}`
-          : null}
+        {props.index === props.currentSong ? props.timingTrack : null}
       </span>
       <ListItemSecondaryAction>
         <IconButton

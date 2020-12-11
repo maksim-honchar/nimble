@@ -1,10 +1,8 @@
 import { useState } from "react";
-import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
-import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -13,6 +11,8 @@ const useStyles = makeStyles({
   },
   bigButtons: {
     color: "#4caf50",
+    fontSize: 60,
+    marginRight: -15,
   },
 });
 
@@ -20,58 +20,59 @@ export const Search = (props) => {
   const classes = useStyles();
 
   const [trackTitle, setTrackTitle] = useState("");
+  const [serchTerms, setSearchTerms] = useState(false);
+
+  const letters = /^[a-zA-Z\s]*$/;
 
   const handleChange = (e) => {
-    setTrackTitle(e.target.value);
+    if (e.target.value.match(letters)) {
+      setTrackTitle(e.target.value);
+    }
   };
 
   const playTrack = (e) => {
     e.preventDefault();
+    const regexp = new RegExp(trackTitle, "i");
     props.songs.forEach((track, index) => {
       if (trackTitle === "") {
         props.setIsPlaying(!props.isPlaying);
-      } else if (track.title === trackTitle) {
+      } else if (regexp.test(track.title) && trackTitle.length > 2) {
         props.toggleTrack(index);
         props.setIsPlaying(true);
+        setSearchTerms(false);
+      } else if (trackTitle.length < 3) {
+        setSearchTerms(true);
       }
+      return track;
     });
     setTrackTitle("");
   };
 
   return (
-    <form onSubmit={playTrack}>
-      <FormControl variant="outlined" className="input">
-        <OutlinedInput
-          autoFocus
-          className={classes.root}
-          placeholder="Enter tracker name"
-          id="search track"
-          type="text"
-          value={trackTitle}
-          onChange={handleChange}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="button play"
-                onClick={playTrack}
-                edge="end"
-              >
-                {props.isPlaying ? (
-                  <PauseCircleFilledIcon
-                    fontSize="large"
-                    className={classes.bigButtons}
-                  />
-                ) : (
-                  <PlayCircleFilledIcon
-                    fontSize="large"
-                    className={classes.bigButtons}
-                  />
-                )}
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-      </FormControl>
-    </form>
+    <div className="wrapper-serch_field">
+      <form onSubmit={playTrack}>
+        <FormControl variant="outlined" className="input">
+          <OutlinedInput
+            autoFocus
+            className={classes.root}
+            placeholder={
+              !serchTerms ? "Enter tracker name" : "at least three letters"
+            }
+            id="search track"
+            type="text"
+            value={trackTitle}
+            onChange={handleChange}
+            endAdornment={
+              <InputAdornment position="end">
+                <PlayCircleFilledIcon
+                  fontSize="large"
+                  className={classes.bigButtons}
+                />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+      </form>
+    </div>
   );
 };
