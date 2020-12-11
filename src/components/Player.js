@@ -69,7 +69,12 @@ export const Player = () => {
       <Typography variant="h2" gutterBottom>
         tracker
       </Typography>
-      <Search songs={songs} toggleTrack={toggleTrack} isPlaying={isPlaying} />
+      <Search
+        songs={songs}
+        toggleTrack={toggleTrack}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+      />
       <div className="wrapper-tracks">
         <List>{tracksList}</List>
       </div>

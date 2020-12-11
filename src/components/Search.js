@@ -33,6 +33,8 @@ export const Search = (props) => {
       }
       return track;
     });
+    setTrackTitle("");
+    props.setIsPlaying(!props.isPlaying);
   };
 
   return (
