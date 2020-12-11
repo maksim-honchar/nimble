@@ -5,12 +5,35 @@ import IconButton from "@material-ui/core/IconButton";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    color: "#4caf50",
+  },
+  timing: {
+    color: "#4caf50",
+    marginRight: 50,
+  },
+  deleteButton: {
+    color: "#e57373",
+  },
+});
 
 export const Track = (props) => {
+  const classes = useStyles();
   return (
-    <ListItem>
-      <ListItemText primary={props.title} />
-      <span style={{ marginRight: 50 }}>
+    <ListItem
+      divider
+      selected={props.index === props.currentSong ? true : false}
+    >
+      <ListItemText
+        primary={props.title}
+        className={props.index === props.currentSong ? classes.root : null}
+      />
+      <span
+        className={props.index === props.currentSong ? classes.timing : null}
+      >
         {props.index === props.currentSong
           ? `${props.timingTrack} / ${props.totalTime}`
           : null}
@@ -31,7 +54,7 @@ export const Track = (props) => {
           edge="end"
           aria-label="delete"
           onClick={() => props.deleteTrack(props.title)}
-          style={{ color: "red" }}
+          className={classes.deleteButton}
         >
           <HighlightOffIcon />
         </IconButton>

@@ -3,10 +3,22 @@ import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    borderRadius: 30,
+  },
+  bigButtons: {
+    color: "#4caf50",
+  },
+});
 
 export const Search = (props) => {
+  const classes = useStyles();
+
   const [trackTitle, setTrackTitle] = useState("");
 
   const handleChange = (e) => {
@@ -25,9 +37,10 @@ export const Search = (props) => {
 
   return (
     <form onSubmit={playTrack}>
-      <FormControl variant="outlined">
+      <FormControl variant="outlined" className="input">
         <OutlinedInput
-          style={{ width: 500, borderRadius: 30 }}
+          autoFocus
+          className={classes.root}
           placeholder="Enter tracker name"
           id="search track"
           type="text"
@@ -41,9 +54,15 @@ export const Search = (props) => {
                 edge="end"
               >
                 {props.isPlaying ? (
-                  <PauseCircleOutlineIcon fontSize="large" />
+                  <PauseCircleFilledIcon
+                    fontSize="large"
+                    className={classes.bigButtons}
+                  />
                 ) : (
-                  <PlayCircleOutlineIcon fontSize="large" />
+                  <PlayCircleFilledIcon
+                    fontSize="large"
+                    className={classes.bigButtons}
+                  />
                 )}
               </IconButton>
             </InputAdornment>

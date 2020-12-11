@@ -1,3 +1,25 @@
-.App {
-  text-align: center;
+.app {
+  box-sizing: border-box;
+}
+
+.wrapper-player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.wrapper-tracks {
+  width: 100%;
+}
+
+.input {
+  margin: 10px;
+}
+
+@media (min-width: 600px) {
+  .input {
+    width: 600px;
+  }
 }

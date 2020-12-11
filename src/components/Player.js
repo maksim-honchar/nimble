@@ -1,28 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import List from "@material-ui/core/List";
-import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import { tracks } from "../app/utils";
 
 import { Track } from "./Track";
 import { Search } from "./Search";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    // width: "100%",
-    // maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
 export const Player = () => {
   const audioEl = useRef(null);
-  const classes = useStyles();
 
   const [isPlaying, setIsPlaying] = useState(false);
-  const [songs, setSongs] = useState([
-    { title: "#1", src: "./music/01.mp3" },
-    { title: "#2", src: "./music/02.mp3" },
-    { title: "#3", src: "./music/03.mp3" },
-  ]);
+  const [songs, setSongs] = useState(tracks);
 
   const [currentSong, setCurrentSong] = useState(null);
   const [timeDuration, setTimeDuration] = useState(0);
@@ -56,30 +44,35 @@ export const Player = () => {
   }, [isPlaying, currentSong]);
 
   const tracksList = songs.map((track, index) => (
-    <Track
-      key={index}
-      index={index}
-      title={track.title}
-      currentSong={currentSong}
-      isPlaying={isPlaying}
-      toggleTrack={toggleTrack}
-      deleteTrack={deleteTrack}
-      timingTrack={formatTiming(timeCurrent)}
-      totalTime={formatTiming(timeDuration)}
-    />
+    <div className="tracks" key={index}>
+      <Track
+        index={index}
+        title={track.title}
+        currentSong={currentSong}
+        isPlaying={isPlaying}
+        toggleTrack={toggleTrack}
+        deleteTrack={deleteTrack}
+        timingTrack={formatTiming(timeCurrent)}
+        totalTime={formatTiming(timeDuration)}
+      />
+    </div>
   ));
 
   return (
-    <div>
+    <div className="wrapper-player">
       <audio
-        controls
-        src={songs.length && currentSong !== null ? songs[currentSong].src : ""} // При удалении последнего трека нужен null
+        src={songs.length && currentSong !== null ? songs[currentSong].src : ""}
         ref={audioEl}
         onTimeUpdate={currentTimeTrack}
         onCanPlay={durationTrack}
       />
+      <Typography variant="h2" gutterBottom>
+        tracker
+      </Typography>
       <Search songs={songs} toggleTrack={toggleTrack} isPlaying={isPlaying} />
-      <List className={classes.root}>{tracksList}</List>
+      <div className="wrapper-tracks">
+        <List>{tracksList}</List>
+      </div>
     </div>
   );
 };
