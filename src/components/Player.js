@@ -19,9 +19,9 @@ export const Player = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [songs, setSongs] = useState([
-    { title: "No name tracker  #1", src: "./music/01.mp3" },
-    { title: "No name tracker  #2", src: "./music/02.mp3" },
-    { title: "No name tracker  #3", src: "./music/03.mp3" },
+    { title: "#1", src: "./music/01.mp3" },
+    { title: "#2", src: "./music/02.mp3" },
+    { title: "#3", src: "./music/03.mp3" },
   ]);
 
   const [currentSong, setCurrentSong] = useState(null);
@@ -76,7 +76,7 @@ export const Player = () => {
         onTimeUpdate={currentTimeTrack}
         onCanPlay={durationTrack}
       />
-      <Search />
+      <Search songs={songs} toggleTrack={toggleTrack} isPlaying={isPlaying} />
       <List className={classes.root}>{tracksList}</List>
     </div>
   );
