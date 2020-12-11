@@ -20,7 +20,7 @@ export const Search = (props) => {
   const classes = useStyles();
 
   const [trackTitle, setTrackTitle] = useState("");
-  const [serchTerms, setSearchTerms] = useState(false);
+  const [searchTerms, setSearchTerms] = useState(false);
 
   const letters = /^[a-zA-Z\s]*$/;
 
@@ -32,6 +32,11 @@ export const Search = (props) => {
 
   const playTrack = (e) => {
     e.preventDefault();
+    if (trackTitle.length >= 3) {
+      setSearchTerms(false);
+    } else {
+      setSearchTerms(true);
+    }
     const regexp = new RegExp(trackTitle, "i");
     props.songs.forEach((track, index) => {
       if (trackTitle === "") {
@@ -40,10 +45,7 @@ export const Search = (props) => {
         props.toggleTrack(index);
         props.setIsPlaying(true);
         setSearchTerms(false);
-      } else if (trackTitle.length < 3) {
-        setSearchTerms(true);
       }
-      return track;
     });
     setTrackTitle("");
   };
@@ -56,7 +58,7 @@ export const Search = (props) => {
             autoFocus
             className={classes.root}
             placeholder={
-              !serchTerms ? "Enter tracker name" : "at least three letters"
+              searchTerms ? "at least three letters" : "Enter tracker name"
             }
             id="search track"
             type="text"
