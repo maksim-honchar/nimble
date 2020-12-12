@@ -5,16 +5,17 @@ import { tracks } from "../app/utils";
 
 import { Track } from "./Track";
 import { Search } from "./Search";
+import { NotFound } from "./NotFound";
 
 export const Player = () => {
   const audioEl = useRef(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [songs, setSongs] = useState(tracks);
-
   const [currentSong, setCurrentSong] = useState(null);
   const [timeDuration, setTimeDuration] = useState(0);
   const [timeCurrent, setTimeCurrent] = useState(0);
+  const [isFind, setIsFind] = useState(true);
 
   const durationTrack = (e) => setTimeDuration(e.target.duration);
   const currentTimeTrack = (e) => setTimeCurrent(e.target.currentTime);
@@ -59,6 +60,14 @@ export const Player = () => {
     </div>
   ));
 
+  const trackList = (
+    <div className="wrapper-tracks">
+      <List>{tracksList}</List>
+    </div>
+  );
+
+  const notFoundPage = <NotFound setIsFind={setIsFind} />;
+
   return (
     <div className="wrapper-player">
       <audio
@@ -78,10 +87,9 @@ export const Player = () => {
         toggleTrack={toggleTrack}
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
+        setIsFind={setIsFind}
       />
-      <div className="wrapper-tracks">
-        <List>{tracksList}</List>
-      </div>
+      {isFind ? trackList : notFoundPage}
     </div>
   );
 };

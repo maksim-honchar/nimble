@@ -38,15 +38,22 @@ export const Search = (props) => {
       setSearchTerms(true);
     }
     const regexp = new RegExp(trackTitle, "i");
+
+    props.songs.forEach((track) => {
+      if (track.title.match(regexp) === null) {
+        props.setIsFind(false);
+      }
+    });
+
     props.songs.forEach((track, index) => {
-      if (trackTitle === "") {
-        props.setIsPlaying(!props.isPlaying);
-      } else if (regexp.test(track.title) && trackTitle.length > 2) {
+      if (track.title.match(regexp) && trackTitle.length > 2) {
         props.toggleTrack(index);
         props.setIsPlaying(true);
         setSearchTerms(false);
+        props.setIsFind(true);
       }
     });
+
     setTrackTitle("");
   };
 

@@ -24,7 +24,20 @@
 
 .title {
   margin-top: 100px;
-  /* margin-bottom: 50px; */
+}
+
+.wrapper-not_found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 5px;
+}
+
+.title-not_found {
+  margin: 10px;
+  font-size: large;
 }
 
 @media (min-width: 600px) {
@@ -36,5 +49,8 @@
   }
   .wrapper-serch_field {
     margin: 30px auto 10px auto;
+  }
+  .wrapper-not_found {
+    width: 500px;
   }
 }
