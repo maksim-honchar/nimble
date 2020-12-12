@@ -68,6 +68,12 @@ export const Player = () => {
 
   const notFoundPage = <NotFound setIsFind={setIsFind} />;
 
+  const keyboardBack = (e) => (e.code === "Escape" ? setIsFind(true) : null);
+
+  useEffect(() => {
+    window.addEventListener("keydown", keyboardBack);
+  });
+
   return (
     <div className="wrapper-player">
       <audio

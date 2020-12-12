@@ -3,7 +3,8 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 
 export const NotFound = (props) => {
-  const back = () => props.setIsFind(true);
+  const mouseBack = () => props.setIsFind(true);
+
   return (
     <Paper className="wrapper-not_found" elevation={3}>
       <div className="title-not_found">
@@ -12,7 +13,7 @@ export const NotFound = (props) => {
         </Typography>
       </div>
       <div>
-        <Button onClick={back} size="large" variant="outlined">
+        <Button onClick={mouseBack} size="large" variant="outlined">
           Back
         </Button>
       </div>

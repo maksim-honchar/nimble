@@ -24,8 +24,10 @@ export const Track = (props) => {
   const classes = useStyles();
   return (
     <ListItem
+      button
       divider
       selected={props.index === props.currentSong ? true : false}
+      onClick={() => props.toggleTrack(props.index)}
     >
       <ListItemText
         primary={props.title}
