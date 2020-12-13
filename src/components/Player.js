@@ -66,7 +66,7 @@ export const Player = () => {
     </div>
   );
 
-  const notFoundPage = <NotFound setIsFind={setIsFind} />;
+  const notFoundPage = <NotFound setIsFind={setIsFind} songs={songs} />;
 
   const keyboardBack = (e) => (e.code === "Escape" ? setIsFind(true) : null);
 
@@ -95,7 +95,7 @@ export const Player = () => {
         setIsPlaying={setIsPlaying}
         setIsFind={setIsFind}
       />
-      {isFind ? trackList : notFoundPage}
+      {!isFind || !songs.length ? notFoundPage : trackList}
     </div>
   );
 };

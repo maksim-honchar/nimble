@@ -5,6 +5,28 @@ import Paper from "@material-ui/core/Paper";
 export const NotFound = (props) => {
   const mouseBack = () => props.setIsFind(true);
 
+  // const reloadPage = () => window.location.reload(false);
+
+  const buttonBack = (
+    <div>
+      <Button onClick={mouseBack} size="large" variant="outlined">
+        Back
+      </Button>
+    </div>
+  );
+
+  const buttonReload = (
+    <div>
+      <Button
+        onClick={() => window.location.reload(false)}
+        size="large"
+        variant="outlined"
+      >
+        Reload tracks
+      </Button>
+    </div>
+  );
+
   return (
     <Paper className="wrapper-not_found" elevation={3}>
       <div className="title-not_found">
@@ -12,11 +34,7 @@ export const NotFound = (props) => {
           <strong>CONTENT NOT FOUND</strong>
         </Typography>
       </div>
-      <div>
-        <Button onClick={mouseBack} size="large" variant="outlined">
-          Back
-        </Button>
-      </div>
+      {props.songs.length ? buttonBack : buttonReload}
     </Paper>
   );
 };
