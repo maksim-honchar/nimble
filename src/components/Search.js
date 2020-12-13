@@ -39,6 +39,10 @@ export const Search = (props) => {
     }
     const regexp = new RegExp(trackTitle, "i");
 
+    if (!props.songs.length) {
+      props.setIsFind(false);
+    }
+
     props.songs.forEach((track) => {
       if (track.title.match(regexp) === null) {
         props.setIsFind(false);
