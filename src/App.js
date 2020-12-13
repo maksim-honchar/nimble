@@ -1,6 +1,6 @@
 import Container from "@material-ui/core/Container";
 
-import "./App.css";
+import "./App.scss";
 import { Player } from "./components/Player";
 
 function App() {
